@@ -133,31 +133,258 @@
     }
 
     .generate-btn button {
-      background-color: #d3d3d3;
-      color: #666;
+      background-color: #4a87e0;
+      color: #ffffff;
       border: none;
       padding: 10px 20px;
       border-radius: 20px;
       font-size: 16px;
-      cursor: not-allowed;
     }
 
-    .generate-info {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #555;
-      text-align: center;
-    }
+    /* General styles */
+#wifi-card {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+}
 
-    .generate-info a {
-      color: #007bff;
-      text-decoration: none;
-    }
+/* Heading */
+.wifi-card h4 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
 
-    .generate-info a:hover {
-      text-decoration: underline;
-    }
+/* Form */
+.wifi-form {
+  display: grid;
+  gap: 20px;
+}
 
+/* Form group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.form-group label span {
+  font-weight: normal;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Inputs and Select */
+.form-control {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+}
+
+/* Button */
+#generateQr {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#generateQr:enabled {
+  background-color: #007bff;
+  cursor: pointer;
+}
+#qr-generator-container {
+  font-family: Arial, sans-serif;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#upload-section {
+  margin-bottom: 20px;
+}
+
+#upload-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#upload-btn:hover {
+  background-color: #0056b3;
+}
+
+#supported-formats {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #f0f8ff;
+}
+
+#size-options {
+  margin: 20px 0;
+  text-align: left;
+}
+
+#size-options label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#generate-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: not-allowed;
+}
+
+#generate-btn:enabled {
+  background-color: #28a745;
+  cursor: pointer;
+}
+
+#generate-btn:enabled:hover {
+  background-color: #218838;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 0;
+}
+
+#content-section {
+  margin-top: 20px;
+}
+
+#form-layout {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.form-header {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.input-section {
+  margin-bottom: 15px;
+}
+
+.input-section input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.qr-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.qr-buttons button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qr-buttons button#static-qr {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.qr-buttons button#dynamic-qr {
+  background-color: #2196F3;
+  color: white;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-footer button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-footer .generate-qr {
+  background-color: #FF5722;
+  color: white;
+}
+/* Add/update these CSS rules */
+.btn-outline-primary {
+  background-color: transparent !important;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary.active {
+  background-color: #4a87e0 !important;
+  color: white !important;
+  border-color: #4a87e0 !important;
+}
+
+.btn-outline-primary:not(.active):hover {
+  background-color: rgba(74, 135, 224, 0.1) !important;
+  color: #4a87e0 !important;
+}
   </style>
 </head>
 <body>
@@ -194,16 +421,17 @@
         <button id="btn-menu" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">restaurant_menu</span> Menu
         </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        <!-- Add id attribute -->
+        <button id="btn-app-stores" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">apps</span> App Stores
         </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        <button id="btn-wifi" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">wifi</span> Wi-Fi
         </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        <button id="btn-music" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">music_note</span> MP3
-        </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        </button>
+        <button id="btn-event" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">event</span> Event
         </button>
     </div>
@@ -240,10 +468,155 @@
     const btnFile = document.getElementById("btn-file");
     const btnLinkPage = document.getElementById("btn-link-page");
     const contentSection = document.getElementById("content-section");
-    const btnMenu = document.getElementById("btn-menu");
+    const btnMusic = document.getElementById("btn-music");
+    const btnWifi = document.getElementById("btn-wifi");
+// Change from
+// To
+const btnEvent = document.getElementById("btn-event");
 
-// Event listener for Menu button
-// Event listener for Menu button
+btnEvent.addEventListener("click", () => {
+  contentSection.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">Step 1: Enter Event Details</h5>
+      <form>
+        <div class="mb-4">
+          <label for="eventTitle" class="form-label">Event Title</label>
+          <input type="text" class="form-control" id="eventTitle" placeholder="Enter event name">
+          <small class="text-muted">Enter the name of your event</small>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="eventDate" class="form-label">Date</label>
+            <input type="date" class="form-control" id="eventDate">
+          </div>
+          <div class="col-md-6">
+            <label for="eventTime" class="form-label">Time</label>
+            <input type="time" class="form-control" id="eventTime">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="eventLocation" class="form-label">Location</label>
+          <input type="text" class="form-control" id="eventLocation" placeholder="Enter event location">
+          <small class="text-muted">Physical address or virtual meeting link</small>
+        </div>
+        <div class="mb-4">
+          <label for="eventDescription" class="form-label">Description</label>
+          <textarea class="form-control" id="eventDescription" rows="3" placeholder="Enter event description"></textarea>
+        </div>
+        <div class="d-grid">
+          <button type="button" class="btn btn-primary">Generate QR Code</button>
+        </div>
+      </form>
+      <p class="text-muted mt-3 text-center">
+        Create a QR code for your event that adds it directly to calendars.
+      </p>
+      <p class="text-muted text-center">
+        We recommend using dynamic QR codes to update event details even after printing.
+      </p>
+    </div>`;
+  setActiveButton(btnEvent);
+});
+
+btnMusic.addEventListener("click", () => {
+  contentSection.innerHTML = `
+      <div id="qr-generator-container" class="container">
+      <h2>Upload File and Generate QR Code</h2>
+      <div id="upload-section">
+          <button id="upload-btn" class="upload-btn">
+          <span class="material-icons">upload</span> Upload File
+          </button>
+          <p>Supported formats:</p>
+          <div id="supported-formats">
+          <button id="btn-music" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+              <span class="material-icons">music_note</span> MP3
+          </button>
+          <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+              <span class="material-icons">music_note</span> WAV
+          </button>
+          </div>
+      </div>
+  
+      <div id="size-options">
+          <p>Select File Size:</p>
+          <label>
+          <input type="radio" name="size" value="5MB" /> 5MB (Regular)
+          </label>
+          <label>
+          <input type="radio" name="size" value="10MB" /> 10MB (Advanced)
+          </label>
+          <label>
+          <input type="radio" name="size" value="20MB" /> 20MB (Premium)
+          </label>
+          <label>
+          <input type="radio" name="size" value="60MB" /> 60MB (Professional)
+          </label>
+      </div>
+  
+      <button id="generate-btn" class="generate-btn" disabled>
+          Generate Dynamic QR Code
+      </button>
+      <p class="note">We only provide dynamic QR codes for MP3 files.</p>
+      </div>
+    `;
+    });
+
+const btnForm = document.getElementById("btn-form");
+
+    btnForm.addEventListener("click", () => {
+    contentSection.innerHTML = `
+        <div class="card-body">
+            <div class="form-header">Step 1: Enter the URL of your Google Form</div>
+            <div class="input-section">
+                <input type="text" placeholder="https://docs.google.com/forms">
+            </div>
+            <div class="qr-buttons">
+                <button id="static-qr">Static QR</button>
+                <button id="dynamic-qr">Dynamic QR</button>
+            </div>
+            <div class="form-footer">
+                <p>We recommend creating a dynamic QR code for tracking performance and editing data even after printing.</p>
+                <button class="generate-qr">Generate QR Code</button>
+            </div>
+        </div>
+    `;
+    });
+const btnAppStores = document.getElementById("btn-app-stores");
+
+
+btnAppStores.addEventListener("click", () => {
+  contentSection.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">Step 1: Enter the URL of your App Store or Google Play</h5>
+      <form>
+        <div class="mb-4">
+          <label for="iosUrl" class="form-label">URL for iOS App Store</label>
+          <input type="text" class="form-control" id="iosUrl" placeholder="https://apps.apple.com/app/...">
+          <small class="text-muted">Enter your iOS app store link</small>
+        </div>
+        <div class="mb-4">
+          <label for="androidUrl" class="form-label">URL for Google Play Store</label>
+          <input type="text" class="form-control" id="androidUrl" placeholder="https://play.google.com/store/apps/...">
+          <small class="text-muted">Enter your Android app store link</small>
+        </div>
+        <div class="mb-4">
+          <label for="harmonyUrl" class="form-label">URL for Harmony Store</label>
+          <input type="text" class="form-control" id="harmonyUrl" placeholder="https://appgallery.huawei.com/...">
+          <small class="text-muted">Enter your Harmony OS app store link (optional)</small>
+        </div>
+        <div class="d-grid">
+          <button type="button" class="btn btn-primary">Generate QR Code</button>
+        </div>
+      </form>
+      <p class="text-muted mt-3 text-center">
+        Learn how to track data with dynamic QR codes for better analytics.
+      </p>
+      <p class="text-muted text-center">
+        We only provide dynamic QR codes for App Store solutions to ensure better tracking and updates.
+      </p>
+    </div>`;
+  setActiveButton(btnAppStores);
+});
+const btnMenu = document.getElementById("btn-menu");    // Event listener for Menu button
 btnMenu.addEventListener("click", () => {
   contentSection.innerHTML = `
     <div class="card-body">
@@ -290,6 +663,48 @@ btnMenu.addEventListener("click", () => {
   });
 });
 
+    btnWifi.addEventListener("click", () => {
+    contentSection.innerHTML = `
+        <div class="card-body">
+        <h4>STEP 1: Complete the WiFi Data Entry</h4>
+        <div class="wifi-form">
+            <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" class="form-control">
+                <option value="" disabled selected>Please select</option>
+                <option value="WPA">WPA</option>
+                <option value="WEP">WEP</option>
+                <option value="No encryption">No encryption</option>
+            </select>
+            </div>
+            <div class="form-group">
+            <label for="ssid">SSID <span>(Check the bottom or side of your router)</span></label>
+            <input type="text" id="ssid" class="form-control" placeholder="Enter SSID">
+            </div>
+            <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Enter Password">
+            </div>
+            <button id="generateQr" class="btn btn-secondary" disabled>Generate QR Code</button>
+        </div>
+        </div>
+    `;
+
+    // Enable the Generate button only when required fields are filled
+    const ssidInput = document.getElementById("ssid");
+    const passwordInput = document.getElementById("password");
+    const typeSelect = document.getElementById("type");
+    const generateQr = document.getElementById("generateQr");
+
+    [ssidInput, passwordInput, typeSelect].forEach((element) =>
+        element.addEventListener("input", () => {
+        generateQr.disabled =
+            !ssidInput.value || !passwordInput.value || !typeSelect.value;
+        })
+    );
+    });
+
+
     btnLinkPage.addEventListener("click", () => {
       contentSection.innerHTML = `
         <div class="card-body">
@@ -330,16 +745,13 @@ btnMenu.addEventListener("click", () => {
         <span>Word</span>
       </div>
       <div class="file-sizes">
-        <div><input type="radio" name="fileSize" disabled> 5MB Regular</div>
-        <div><input type="radio" name="fileSize" disabled> 10MB Advanced</div>
-        <div><input type="radio" name="fileSize" disabled> 20MB Premium</div>
-        <div><input type="radio" name="fileSize" disabled> 60MB Professional</div>
+        <div><input type="radio" name="fileSize"> 5MB Regular</div>
+        <div><input type="radio" name="fileSize"> 10MB Advanced</div>
+        <div><input type="radio" name="fileSize"> 20MB Premium</div>
+        <div><input type="radio" name="fileSize"> 60MB Professional</div>
       </div>
       <div class="generate-btn">
-        <button disabled>Generate Dynamic QR Code</button>
-      </div>
-      <div class="generate-info">
-        <p>We only provide dynamic QR codes for File Solution.</p>
+        <button type="button" class="btn btn-primary w-100">Generate Dynamic QR Code</button>
       </div>
     </div>
   `;
@@ -499,11 +911,19 @@ btnMenu.addEventListener("click", () => {
     
 
     // Function to set active button
-    function setActiveButton(activeButton) {
-      const buttons = document.querySelectorAll(".btn");
-      buttons.forEach(button => button.classList.remove("active"));
-      activeButton.classList.add("active");
-    }
+// Update the setActiveButton function
+function setActiveButton(activeButton) {
+  // Remove active class from all buttons
+  const buttons = document.querySelectorAll(".btn-outline-primary");
+  buttons.forEach(button => {
+    button.classList.remove("active");
+  });
+  
+  // Add active class to clicked button
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+}
   </script>
 
 <script>
