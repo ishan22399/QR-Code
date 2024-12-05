@@ -48,6 +48,116 @@
       background-color: #3b6fc9;
     }
 
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .upload-card {
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-card h4 {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .upload-box {
+      border: 2px dashed #b0bec5;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      background-color: #fafafa;
+      transition: background-color 0.3s;
+    }
+
+    .upload-box:hover {
+      background-color: #f0f8ff;
+    }
+
+    .upload-box button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .upload-box button:hover {
+      background-color: #0056b3;
+    }
+
+    .supported-formats {
+      margin-top: 20px;
+    }
+
+    .supported-formats span {
+      display: inline-block;
+      background-color: #f4f6f8;
+      color: #333;
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .file-sizes {
+      margin-top: 20px;
+    }
+
+    .file-sizes div {
+      display: inline-block;
+      margin: 10px 5px;
+      font-size: 14px;
+    }
+
+    .file-sizes div input {
+      margin-right: 5px;
+    }
+
+    .generate-btn {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .generate-btn button {
+      background-color: #d3d3d3;
+      color: #666;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: not-allowed;
+    }
+
+    .generate-info {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+    }
+
+    .generate-info a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .generate-info a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -72,13 +182,13 @@
         <button id="btn-vcard" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">person</span> vCard
         </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        <button id="btn-file" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">file_present</span> File
         </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        <button id="btn-link-page" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">link</span> Link Page
         </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        <button id="btn-form" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">assignment</span> Google Form
         </button>
         <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
@@ -127,7 +237,79 @@
     // Selectors
     const btnUrl = document.getElementById("btn-url");
     const btnVCard = document.getElementById("btn-vcard");
+    const btnFile = document.getElementById("btn-file");
+    const btnLinkPage = document.getElementById("btn-link-page");
     const contentSection = document.getElementById("content-section");
+
+    btnLinkPage.addEventListener("click", () => {
+      contentSection.innerHTML = `
+        <div class="card-body">
+          <h5 class="card-title">Step 1: Enter the Link Page URL</h5>
+          <form>
+            <div class="mb-3">
+              <label for="linkPageUrl" class="form-label">Link Page URL</label>
+              <input type="text" class="form-control" id="linkPageUrl" placeholder="https://www.mywebsite.com/link-page">
+            </div>
+            <div class="mb-3">
+              <label for="linkPageDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="linkPageDescription" rows="3" placeholder="Enter a description for the link page"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary w-100">Generate QR Code</button>
+          </form>
+          <p class="text-muted mt-3">
+            Enter the URL of the link page you want to generate a QR code for.
+          </p>
+        </div>`;
+      setActiveButton(btnLinkPage);
+    });
+
+    btnFile.addEventListener("click", () => {
+  contentSection.innerHTML = `
+    <div class="card-body">
+      <h4>STEP 1: Upload File and Generate QR Code</h4>
+      <div class="upload-box" id="uploadBox">
+        <p>Click to <button id="uploadBtn">Upload File</button></p>
+        <input type="file" id="fileInput" style="display: none;" />
+      </div>
+      <div class="supported-formats">
+        <strong>Supported formats:</strong>
+        <span>PDF</span>
+        <span>JPEG</span>
+        <span>PNG</span>
+        <span>MP4</span>
+        <span>Excel</span>
+        <span>Word</span>
+      </div>
+      <div class="file-sizes">
+        <div><input type="radio" name="fileSize" disabled> 5MB Regular</div>
+        <div><input type="radio" name="fileSize" disabled> 10MB Advanced</div>
+        <div><input type="radio" name="fileSize" disabled> 20MB Premium</div>
+        <div><input type="radio" name="fileSize" disabled> 60MB Professional</div>
+      </div>
+      <div class="generate-btn">
+        <button disabled>Generate Dynamic QR Code</button>
+      </div>
+      <div class="generate-info">
+        <p>We only provide dynamic QR codes for File Solution.</p>
+      </div>
+    </div>
+  `;
+
+  // Add functionality for the file upload logic.
+  const uploadBox = document.getElementById("uploadBox");
+  const fileInput = document.getElementById("fileInput");
+
+  uploadBox.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      alert(`You selected: ${file.name}`);
+    }
+  });
+});
 
     // Event listener for URL button
     btnUrl.addEventListener("click", () => {
@@ -264,6 +446,8 @@
   </div>`;
       setActiveButton(btnVCard);
     });
+
+    
 
     // Function to set active button
     function setActiveButton(activeButton) {
