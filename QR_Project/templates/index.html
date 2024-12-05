@@ -191,7 +191,7 @@
         <button id="btn-form" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">assignment</span> Google Form
         </button>
-        <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+        <button id="btn-menu" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
           <span class="material-icons">restaurant_menu</span> Menu
         </button>
         <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
@@ -240,6 +240,55 @@
     const btnFile = document.getElementById("btn-file");
     const btnLinkPage = document.getElementById("btn-link-page");
     const contentSection = document.getElementById("content-section");
+    const btnMenu = document.getElementById("btn-menu");
+
+// Event listener for Menu button
+// Event listener for Menu button
+btnMenu.addEventListener("click", () => {
+  contentSection.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">Step 1: Upload File and Generate QR Code</h5>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="upload-section text-center">
+            <div class="file-options d-flex justify-content-around mb-3">
+              <button class="btn btn-outline-secondary">5MB</button>
+              <button class="btn btn-outline-secondary">10MB</button>
+              <button class="btn btn-outline-secondary">20MB</button>
+              <button class="btn btn-outline-secondary">60MB</button>
+            </div>
+            <p class="text-muted">Upload your MENU: PDF | JPEG | PNG</p>
+            <div class="upload-box mb-3">
+              <span class="material-icons" style="font-size: 48px;">upload</span>
+              <p>Click to Upload</p>
+              <input type="file" id="menuFileInput" accept=".pdf, .jpeg, .png" style="display: none;">
+            </div>
+            <a href="#" class="d-block text-primary">Usage instructions?</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer text-center mt-4">
+        <button class="btn btn-primary w-100">Generate dynamic QR code</button>
+        <p class="text-muted mt-2">We only provide dynamic QR codes for Menu QR code.</p>
+      </div>
+    </div>`;
+  setActiveButton(btnMenu);
+
+  // Add functionality for the file upload logic.
+  const menuFileInput = document.getElementById("menuFileInput");
+  const uploadBox = document.querySelector(".upload-box");
+
+  uploadBox.addEventListener("click", () => {
+    menuFileInput.click();
+  });
+
+  menuFileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      alert(`You selected: ${file.name}`);
+    }
+  });
+});
 
     btnLinkPage.addEventListener("click", () => {
       contentSection.innerHTML = `
