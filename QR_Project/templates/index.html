@@ -557,7 +557,9 @@ btnMusic.addEventListener("click", () => {
       </button>
       <p class="note">We only provide dynamic QR codes for MP3 files.</p>
       </div>
+
     `;
+  setActiveButton(btnMusic);
     });
 
 const btnForm = document.getElementById("btn-form");
@@ -579,6 +581,7 @@ const btnForm = document.getElementById("btn-form");
             </div>
         </div>
     `;
+    setActiveButton(btnForm);
     });
 const btnAppStores = document.getElementById("btn-app-stores");
 
@@ -689,6 +692,7 @@ btnMenu.addEventListener("click", () => {
         </div>
         </div>
     `;
+    setActiveButton(btnWifi);
 
     // Enable the Generate button only when required fields are filled
     const ssidInput = document.getElementById("ssid");
@@ -755,6 +759,7 @@ btnMenu.addEventListener("click", () => {
       </div>
     </div>
   `;
+  setActiveButton(btnFile);
 
   // Add functionality for the file upload logic.
   const uploadBox = document.getElementById("uploadBox");

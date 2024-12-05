@@ -24,11 +24,13 @@ body {
     background-color: #f8f9fa;
   }
   /* Add this to your CSS */
-.btn-outline-primary.active {
-  background-color: #4a87e0 !important;
-  color: white !important;
-  border-color: #4a87e0 !important;
-}
+  .btn-outline-primary {
+    background-color: transparent !important;
+    border-color: #007bff !important;
+    color: #007bff !important;
+    transition: all 0.3s ease !important;
+  }
+  
 
 .btn-outline-primary:not(.active):hover {
   background-color: #fcffff !important;
