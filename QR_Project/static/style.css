@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Raleway', sans-serif;
   }
   
   header {
@@ -20,99 +20,207 @@ body {
     font-weight: bold;
   }
   
-  footer {
-    background-color: #f8f9fa;
-  }
-  /* Add this to your CSS */
-  .btn-outline-primary {
-    background-color: transparent !important;
-    border-color: #007bff !important;
-    color: #007bff !important;
-    transition: all 0.3s ease !important;
-  }
   
-
-.btn-outline-primary:not(.active):hover {
-  background-color: #fcffff !important;
-  color: #4a87e0 !important;
-}
-
-
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
-}
-
-#content-section {
-    margin-top: 20px;
-}
-
-#form-layout {
-    border: 1px solid #ddd;
+  body {
+    font-family: 'Raleway', sans-serif;
+    background-color: #f4f4f4;
     padding: 20px;
-    margin-top: 20px;
+  }
+
+  .upload-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    background-color: #f9f9f9;
-}
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
-.form-header {
-    font-size: 18px;
+  .upload-card h4 {
     margin-bottom: 15px;
+    font-size: 16px;
+    color: #333;
     font-weight: bold;
-}
+  }
 
-.input-section {
-    margin-bottom: 15px;
-}
-
-.input-section input {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.qr-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.qr-buttons button {
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
+  .upload-box {
+    border: 2px dashed #b0bec5;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
     cursor: pointer;
-}
+    background-color: #fafafa;
+    transition: background-color 0.3s;
+  }
 
-.qr-buttons button#static-qr {
-    background-color: #4CAF50;
-    color: white;
-}
+  .upload-box:hover {
+    background-color: #f0f8ff;
+  }
 
-.qr-buttons button#dynamic-qr {
-    background-color: #2196F3;
-    color: white;
-}
-
-.form-footer {
-    display: flex;
-    justify-content: space-between;
-}
-
-.form-footer button {
-    padding: 10px 20px;
-    font-size: 14px;
+  .upload-box button {
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    border-radius: 4px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
     cursor: pointer;
+  }
+
+  .upload-box button:hover {
+    background-color: #0056b3;
+  }
+
+  .supported-formats {
+    margin-top: 20px;
+  }
+
+  .supported-formats span {
+    display: inline-block;
+    background-color: #f4f6f8;
+    color: #333;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .file-sizes {
+    margin-top: 20px;
+  }
+
+  .file-sizes div {
+    display: inline-block;
+    margin: 10px 5px;
+    font-size: 14px;
+  }
+
+  .file-sizes div input {
+    margin-right: 5px;
+  }
+
+  .generate-btn {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .generate-btn button {
+    background-color: #d3d3d3;
+    color: #666;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: not-allowed;
+  }
+
+  .generate-info {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+  }
+
+  .generate-info a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .generate-info a:hover {
+    text-decoration: underline;
+  }
+
+
+
+/* General Card Styling */
+#upload-qr-card {
+  max-width: 550px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: 'Arial', sans-serif;
 }
 
-.form-footer .generate-qr {
-    background-color: #FF5722;
-    color: white;
+/* Title Styling */
+#card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* File Options Buttons */
+#file-options button {
+  padding: 10px 20px;
+  border: 1px solid #ced4da;
+  color: #555555;
+  border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+#file-options button:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  border-color: #007bff;
+}
+
+/* Upload Box */
+#upload-box {
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#upload-box:hover {
+  background-color: #f0f8ff;
+  border-color: #0056b3;
+}
+
+#upload-icon i {
+  color: #007bff;
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+#upload-text {
+  color: #555555;
+  font-weight: bold;
+}
+
+/* Footer Section */
+#generate-btn {
+  padding: 10px 25px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 25px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#generate-btn:hover {
+  background-color: #0056b3;
+}
+
+#footer-note {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Usage Instructions Link */
+#usage-link {
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+#usage-link:hover {
+  text-decoration: underline;
 }
