@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    
+    .btn.active {
+      background-color: #e4eaf1;
+      color: rgb(26, 25, 25);
+      border-color: #f1f2f4;
+    }
+    .btn:hover {
+      background-color: #ffffff !important;
+      color: rgb(5, 4, 4) !important;
+    }
+    .card-body p.text-muted {
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: #f5f7fb;
+    }
+    .upload-box {
+      border: 1px dashed #4a87e0;
+      border-radius: 8px;
+      text-align: center;
+      padding: 20px;
+      cursor: pointer;
+    }
+    .upload-box:hover {
+      background-color: #e9f1fd;
+    }
+    .form-control {
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+    }
+    .btn-primary {
+      background-color: #5fa015;
+      border-color: #5fa015;
+      border-radius: 5px;
+    }
+    .btn-primary:hover {
+      background-color: #5fa015;
+    }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .upload-card {
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-card h4 {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .upload-box {
+      border: 2px dashed #b0bec5;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      background-color: #fafafa;
+      transition: background-color 0.3s;
+    }
+
+    .upload-box:hover {
+      background-color: #f0f8ff;
+    }
+
+    .upload-box button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .upload-box button:hover {
+      background-color: #0056b3;
+    }
+
+    .supported-formats {
+      margin-top: 20px;
+    }
+
+    .supported-formats span {
+      display: inline-block;
+      background-color: #f4f6f8;
+      color: #333;
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .file-sizes {
+      margin-top: 20px;
+    }
+
+    .file-sizes div {
+      display: inline-block;
+      margin: 10px 5px;
+      font-size: 14px;
+    }
+
+    .file-sizes div input {
+      margin-right: 5px;
+    }
+
+    .generate-btn {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .generate-btn button {
+      background-color: #4a87e0;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+    }
+
+    /* General styles */
+#wifi-card {
+  font-family: 'Raleway', sans-serif;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+/* Heading */
+.wifi-card h4 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form */
+.wifi-form {
+  display: grid;
+  gap: 20px;
+}
+
+/* Form group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.form-group label span {
+  font-weight: normal;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Inputs and Select */
+.form-control {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+}
+
+/* Button */
+#generateQr {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#generateQr:enabled {
+  background-color: #007bff;
+  cursor: pointer;
+}
+#qr-generator-container {
+  font-family: 'Raleway', sans-serif;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#upload-section {
+  margin-bottom: 20px;
+}
+
+#upload-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#upload-btn:hover {
+  background-color: #0056b3;
+}
+
+#supported-formats {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  border: 1px solid #000000;
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #f0f8ff;
+}
+
+#size-options {
+  margin: 20px 0;
+  text-align: left;
+}
+
+#size-options label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#generate-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: not-allowed;
+}
+
+#generate-btn:enabled {
+  background-color: #28a745;
+  cursor: pointer;
+}
+
+#generate-btn:enabled:hover {
+  background-color: #218838;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  margin: 20px;
+  padding: 0;
+}
+
+#content-section {
+  margin-top: 20px;
+}
+
+#form-layout {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.form-header {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.input-section {
+  margin-bottom: 15px;
+}
+
+.input-section input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.qr-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.qr-buttons button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qr-buttons button#static-qr {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.qr-buttons button#dynamic-qr {
+  background-color: #2196F3;
+  color: white;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-footer button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-footer .generate-qr {
+  background-color: #FF5722;
+  color: white;
+}
+/* Add/update these CSS rules */
+.btn-outline-primary {
+  background-color: transparent !important;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary.active {
+  background-color: #4a87e0 !important;
+  color: white !important;
+  border-color: #4a87e0 !important;
+}
+
+.btn-outline-primary:not(.active):hover {
+  background-color: rgba(74, 135, 224, 0.1) !important;
+  color: #4a87e0 !important;
+}
+
+footer {
+    background-color: #f8f9fa;
+  }
+
+/* Customization section styles */
+#qr-customize-section {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.nav-tabs .nav-link {
+  color: #333;
+  border: none;
+  padding: 8px 12px;
+}
+
+/* .nav-tabs .nav-link.active {
+  background-color: #040b12;
+  color: #fff;
+  border-radius: 9px;
+} */
+
+.tab-content .pattern-img .eye {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.qr-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.qr-preview .qr-code img {
+  width: 200px;
+  height: auto;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+}
+
+.qr-preview .form-check-label {
+  font-size: 0.9rem;
+}
+
+.qr-preview .format-options {
+  display: flex;
+  gap: 15px;
+}
+
+.qr-preview .btn-success {
+  background-color: #28a745;
+  border: none;
+  font-size: 1rem;
+}
+
+.qr-preview .btn-success:hover {
+  background-color: #218838;
+}
+
+/* Style for active and hidden tabs */
+.tab-pane {
+  display: none;
+}
+.tab-pane.active {
+  display: block;
+}
+
+/* Base styling for the navigation container */
+/* Default styling for navigation container */
+#qrTabs {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  justify-content: center;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* Styling for each button */
+#qrTabs .nav-item button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #f8f8f8; /* Default background */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+/* Hover effect */
+#qrTabs .nav-item button:hover {
+  background-color: #a1d8eb; /* Light blue on hover */
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2); /* Slightly elevated shadow */
+  transform: scale(1.05); /* Subtle zoom effect */
+}
+
+/* Active state styling */
+#qrTabs .nav-item button.active {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  color: #007bff;
+}
+
+/* Material Icons styling for size alignment */
+#qrTabs .nav-item .material-icons {
+  font-size: 24px; /* Increase icon size */
+  margin-right: 10px; /* Space between icon and text */
+  vertical-align: middle;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  #qrTabs {
+    flex-wrap: wrap; /* Wrap buttons on small screens */
+    gap: 8px;
+  }
+}
+
+.pattern-img {
+      width: 150px; /* Set default width */
+      height: auto; /* Maintain aspect ratio */
+      /* border: 2px solid #000; Black border with 2px thickness */
+      border-radius: 0px; /* Optional: Rounded corners */
+      padding: 5px; /* Optional: Space between the image and border */
+    }
+
+    .row {
+      display: flex; /* Align images in a row */
+      margin-top: 10px; /* Space between rows */
+    }
+
+    .col-3 {
+      flex: 1; /* Equal width columns */
+      text-align: center; /* Center align images */
+    }
+
+    button.pattern-btn {
+  background: none; /* Remove button background */
+  border: 1px solid #323232; /* Default button border color */
+  cursor: pointer; /* Ensure it looks clickable */
+}
+
+button.pattern-btn.active {
+  border-color: rgb(29, 230, 50); /* Change border color when active */
+}
+
+.eye-pattern-img {
+  width: 150px; /* Set default width */
+  height: auto; /* Maintain aspect ratio */
+  /* border: 2px solid #000; Black border with 2px thickness */
+  border-radius: 0px; /* Optional: Rounded corners */
+  padding: 5px; /* Optional: Space between the image and border */
+}
+
+.row {
+  display: flex; /* Align images in a row */
+  margin-top: 10px; /* Space between rows */
+}
+
+.col-3 {
+  flex: 1; /* Equal width columns */
+  text-align: center; /* Center align images */
+}
+
+button.eye-pattern-btn {
+  background: none; /* Remove button background */
+  border: 1px solid #323232; /* Default button border color */
+  cursor: pointer; /* Ensure it looks clickable */
+}
+
+button.eye-pattern-btn.active {
+  border-color: rgb(29, 230, 50); /* Change border color when active */
+}
+
+
+.logo-img {
+  width: 70px; /* Set default width */
+  height: auto; /* Maintain aspect ratio */
+  /* border: 2px solid #000; Black border with 2px thickness */
+  border-radius: 2px; /* Optional: Rounded corners */
+  padding: 1px; /* Optional: Space between the image and border */
+}
+
+.row {
+  display: flex; /* Align images in a row */
+  margin-top: 15px; /* Space between rows */
+}
+
+.col-3 {
+  flex: 1; /* Equal width columns */
+  text-align: center; /* Center align images */
+}
+
+button.logo-btn {
+  background: none; /* Remove button background */
+  border: 1px solid #ffffff; /* Default button border color */
+  cursor: pointer; /* Ensure it looks clickable */
+  border-radius: 50%; /* Make the button circular */
+  width: 100px; /* Set width for consistent size */
+  height: 100px; /* Set height for consistent size */
+  display: flex; /* Center the content inside */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+}
+
+button.logo-btn.active {
+  border-color: rgb(29, 217, 230); /* Change border color when active */
+}
+
+
+label {
+  display: block; /* Ensure labels are on separate lines */
+  margin-bottom: 5px; /* Add space between label and input */
+  font-size: 14px; /* Set font size */
+  font-weight: bold; /* Emphasize labels */
+  color: #333; /* Label text color */
+}
+
+input[type="color"],
+input[type="text"],
+select {
+  width: 100%; /* Full width inputs */
+  padding: 8px; /* Add padding inside inputs */
+  margin-bottom: 10px; /* Space between inputs */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Add focus styles for accessibility */
+input[type="color"]:focus,
+input[type="text"]:focus,
+select:focus {
+  border-color: #007bff; /* Highlight border on focus */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add subtle shadow */
+}
+
+/* Gradient Toggle Styles */
+input[type="checkbox"] {
+  margin-right: 5px; /* Space between checkbox and label */
+}
+
+
+/* Styling for the Download button using ID */
+#downloadButton {
+  display: inline-block;
+  padding: 14px 28px; /* Larger button padding */
+  font-size: 16px;    /* Larger font size */
+  font-weight: 600;   /* Bold font */
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px; /* Rounded corners */
+  background-color: #00c853; /* Brighter green color */
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and scale */
+}
+
+#downloadButton:hover {
+  background-color: #00b34a; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+#downloadButton:active {
+  background-color: #00a139; /* Even darker green when clicked */
+  transform: scale(1); /* Reset scale on click */
+}
+
+
+/* Container for centering the card */
+.logo-upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+  min-width: none; /* Full-screen height for vertical centering */
+  background-color: #f5f5f5; /* Light background for contrast */
+  padding: 20px;
+}
+
+/* Card styling */
+.logo-upload-card {
+  background: #ffffff; /* White card */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 10px; /* Rounded corners */
+  padding: 30px;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out; /* Subtle entrance animation */
+}
+
+/* Title styling */
+.logo-upload-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Description styling */
+.logo-upload-description {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Input group styling */
+.logo-upload-input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Space between file input and button */
+}
+
+/* File input styling */
+.logo-custom-file {
+  position: relative;
+  width: 100%;
+}
+
+#logo-file-input {
+  opacity: 0; /* Hide default file input */
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.logo-file-label {
+  display: block;
+  background-color: #f9f9f9;
+  border: 2px solid #ced4da;
+  border-radius: 5px;
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #6c757d;
+  transition: all 0.3s ease;
+}
+
+/* Hover and focus states */
+.logo-file-label:hover,
+.logo-file-label:focus {
+  background-color: #e2e6ea;
+  border-color: #adb5bd;
+  color: #495057;
+}
+
+/* Upload button styling */
+.logo-upload-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logo-upload-button:hover {
+  background-color: #0056b3;
+}
+
+/* Supported formats text */
+.logo-upload-support {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 15px;
+}
+
+/* Fade-in animation for the card */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* General Styling for Colors Customizer */
+#colors {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Description Section */
+#colors-description {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#colors-description .info-icon {
+  color: #007bff;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* Radio Button and Label */
+.color-option .radio-label {
+  font-size: 16px;
+  color: #333;
+  font-weight: 300;
+}
+
+/* Color Picker and Input Fields */
+.color-box {
+  width: 70px;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-code {
+  width: 120px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+/* Gradient Arrow */
+.gradient-arrow {
+  font-size: 20px;
+  color: #555;
+}
+
+/* Transparent Checkbox */
+.transparent-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.transparent-checkbox .form-check-input {
+  transform: scale(1.2);
+}
+
+.transparent-checkbox .form-check-label {
+  font-size: 14px;
+  color: #555;
+}
+
+
+  </style>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3 position-relative">
+        <div class="container d-flex justify-content-between align-items-center">
+          <div>
+            <h1>QR Code Generation</h1>
+          </div>
+          <div>
+            <div>
+                <a href="#" class="active">
+                  <button class="btn btn-light mx-1 active">
+                    <i class="fas fa-home"></i> Home
+                  </button>
+                </a>
+                <a href="#">
+                  <button class="btn btn-light mx-1">
+                    <i class="fas fa-user"></i> Profile
+                  </button>
+                </a>
+                <a href="#">
+                  <button class="btn btn-light mx-1">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                  </button>
+                </a>
+              </div>              
+          </div>          
+        </div>
+      </header>
+      
+  <main class="container my-4">
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <button id="btn-url" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent active">
+          <span class="material-icons">link</span> URL
+        </button>
+        <button id="btn-vcard" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">person</span> vCard
+        </button>
+        <button id="btn-file" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">file_present</span> File
+        </button>
+        <button id="btn-link-page" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">link</span> Link Page
+        </button>
+        <button id="btn-form" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">assignment</span> Google Form
+        </button>
+        <button id="btn-menu" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">restaurant_menu</span> Menu
+        </button>
+        <!-- Add id attribute -->
+        <button id="btn-app-stores" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">apps</span> App Stores
+        </button>
+        <button id="btn-wifi" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">wifi</span> Wi-Fi
+        </button>
+        <button id="btn-music" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">music_note</span> MP3
+        </button>
+        <button id="btn-event" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+          <span class="material-icons">event</span> Event
+        </button>
+    </div>
+
+    <!-- Dynamic Content Section -->
+    <div id="content-section" class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Enter the URL</h5>
+        <input type="text" class="form-control mb-3" placeholder="https://www.mywebsite.com">
+        <div class="d-flex align-items-center gap-3">
+          <label class="form-check-label">
+            <input type="radio" name="qr-type" checked> Static QR
+          </label>
+          <label class="form-check-label">
+            <input type="radio" name="qr-type"> Dynamic QR
+          </label>
+        </div>
+        <button id="generate-btn" class="generate-btn">Generate QR Code</button>
+        <p class="text-muted">
+          We recommend creating a dynamic QR code if you want to track performance and edit data even after printing.
+        </p>
+      </div>
+    </div>
+
+    <!-- QR Code Customization Section -->
+<!-- QR Code Customization Section -->
+<!-- QR Code Customization Section -->
+<div id="qr-customize-section" class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Customize your QR</h5>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="qrTabs">
+      <li class="nav-item">
+        <button type="button"><a class="nav-link active" data-tab="pattern"><span class="material-icons">pattern</span> Pattern</a></button>
+      </li>
+      <li class="nav-item">
+        <button><a class="nav-link" data-tab="eyes"><span class="material-icons">visibility</span> Eyes</a></button>
+      </li>
+      <li class="nav-item">
+        <button><a class="nav-link" data-tab="logo"><span class="material-icons">star</span> Logo</a></button>
+      </li>
+      <li class="nav-item">
+        <button><a class="nav-link" data-tab="colors"><span class="material-icons">palette</span> Colors</a></button>
+      </li>
+      <li class="nav-item">
+        <button><a class="nav-link" data-tab="frame"><span class="material-icons">crop_landscape</span> Frame</a></button>
+      </li>
+      <li class="nav-item">
+        <button><a class="nav-link" data-tab="templates"><span class="material-icons">grid_view</span> Templates</a></button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div id="tab-content" class="mt-3">
+      <!-- Pattern Tab Content (default) -->
+      <div id="pattern" class="tab-pane active">
+        <p>You can customize these templates later to match your brand</p>
+        <div class="row">
+          <!-- Patterns Grid -->
+          <div class="col-3">
+            <button onclick="selectImage('Pattern 1')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/00.svg" alt="Pattern 1" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Pattern 2')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/01.svg" alt="Pattern 2" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Pattern 3')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/02.svg" alt="Pattern 3" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Pattern 4')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/03.svg" alt="Pattern 4" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Pattern 5')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/04.svg" alt="Pattern 5" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Pattern 6')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/05.svg" alt="Pattern 6" class="pattern-img">
+            </button>
+          </div>
+        </div>
+          <div class="row mt-2">
+            <div class="col-3">
+              <button onclick="selectImage('Pattern 7')" class="pattern-btn">
+                <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/06.svg" alt="Pattern 7" class="pattern-img">
+              </button>
+            </div>
+            <div class="col-3">
+              <button onclick="selectImage('Pattern 8')" class="pattern-btn">
+                <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/07.svg" alt="Pattern 8" class="pattern-img">
+              </button>
+            </div>
+            <div class="col-3">
+              <button onclick="selectImage('Pattern 9')" class="pattern-btn">
+                <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/08.svg" alt="Pattern 9" class="pattern-img">
+              </button>
+            </div>
+            <div class="col-3">
+              <button onclick="selectImage('Pattern 10')" class="pattern-btn">
+                <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/09.svg" alt="Pattern 10" class="pattern-img">
+              </button>
+            </div>
+            <div class="col-3">
+              <button onclick="selectImage('Pattern 11')" class="pattern-btn">
+                <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/10.svg" alt="Pattern 11" class="pattern-img">
+              </button>
+            </div>
+            <div class="col-3">
+              <button onclick="selectImage('Pattern 12')" class="pattern-btn">
+                <img src="https://www.qrcode-tiger.com/static/img/Home/Dots/QR2/13.svg" alt="Pattern 12" class="pattern-img">
+              </button>
+            </div>
+          <!-- More pattern buttons... -->
+        </div>
+      </div>
+      
+      <!-- Other Tab Contents -->
+      <div id="eyes" class="tab-pane">
+        <p>Choose eye designs for your QR code.</p>
+        <!-- Eyes content here -->
+      
+        <div class="row">
+          <!-- Patterns Grid -->
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 1')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/00-00.svg" alt="Eye Pattern 1" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 2')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/00-01.svg" alt="Eye Pattern 2" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 3')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/01-00.svg" alt="Eye Pattern 3" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 4')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/01-01.svg" alt="Eye Pattern 4" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 5')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/02-01.svg" alt="Eye Pattern 5" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 6')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/02-02.svg" alt="Eye Pattern 6" class="pattern-img">
+            </button>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 7')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/03-03.svg" alt="Eye Pattern 7" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 8')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/04-04.svg" alt="Eye Pattern 8" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 9')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/05-05.svg" alt="Eye Pattern 9" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 10')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/06-06.svg" alt="Eye Pattern 10" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 11')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/07-01.svg" alt="Eye Pattern 11" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Eye Pattern 12')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Eyes/07-07.svg" alt="Eye Pattern 12" class="pattern-img">
+            </button>
+          </div>
+          <!-- More pattern buttons... -->
+        </div>
+      </div>
+      
+      <div id="logo" class="tab-pane">
+        <p>Upload or select a logo to embed in your QR code.</p>
+        <!-- Logo content here -->
+        <div class="logo-upload-container">
+          <div class="logo-upload-card">
+            <h2 class="logo-upload-title">Upload Your Logo</h2>
+            <p class="logo-upload-description">
+              With this QR code generator with logo, you can easily add your logo for stronger brand recall 
+              (300 x 300px, 72dpi).
+            </p>
+            <div class="logo-upload-input-group">
+              <div class="logo-custom-file">
+                <input 
+                  type="file" 
+                  id="logo-file-input" 
+                  accept="image/png, image/jpeg"
+                >
+                <label for="logo-file-input" class="logo-file-label">Choose file</label>
+              </div>
+              <button type="button" class="logo-upload-button">Upload</button>
+            </div>
+            <p class="logo-upload-support">Supported formats: PNG, JPEG</p>
+          </div>
+        </div>
+        <br>
+        
+        <p>Or use our available logos:</p>
+        <div class="row">
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 1')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303106/mcdonald-s-15-logo.svg" alt="Logo 1" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 2')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303107/facebook-messenger-3-logo.svg" alt="Logo 2" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 3')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303154/instagram-2016-logo.svg" alt="Logo 3" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 4')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303130/snapchat-logo.svg" alt="Logo 4" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 5')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303147/whatsapp-icon-logo.svg" alt="Logo 5" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 6')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303114/facebook-3-logo.svg" alt="Logo 6" class="logo-img">
+            </button>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 7')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303115/twitter-3-logo.svg" alt="Logo 7" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 8')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303161/gmail-icon-logo.svg" alt="Logo 8" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 9')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303198/youtube-icon-logo.svg" alt="Logo 9" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 10')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303197/google-pay-or-tez-logo.svg" alt="Logo 10" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 11')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303196/netflix-2-logo.svg" alt="Logo 11" class="logo-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectLogo('Logo 12')" class="logo-btn">
+              <img src="https://www.svgrepo.com/show/303168/amazon-icon-logo.svg" alt="Logo 12" class="logo-img">
+            </button>
+          </div>
+          <!-- More logo buttons... -->
+        </div>        
+      </div>
+      
+      <div id="colors" class="tab-pane">
+        <p id="colors-description" class="description">
+          <i class="info-icon">ℹ️</i> Embellish your customized QR with your brand colors
+        </p>
+      
+        <!-- Solid Color Option -->
+        <div class="color-option row align-items-center mb-4">
+          <div class="col-auto">
+            <input type="radio" name="color-type" id="solid-color" class="me-2" checked>
+          </div>
+          <div class="col-auto">
+            <label for="solid-color" class="radio-label">Solid Color</label>
+          </div>
+          <div class="col d-flex align-items-center">
+            <input type="color" id="solidColorPicker" class="color-box me-2" value="#054080">
+            <input type="text" id="solidColorCode" class="color-code form-control" value="#054080">
+          </div>
+        </div>
+      
+        <!-- Gradient Color Option -->
+        <div class="color-option row align-items-center mb-4">
+          <div class="col-auto">
+            <input type="radio" name="color-type" id="gradient-color" class="me-2">
+          </div>
+          <div class="col-auto">
+            <label for="gradient-color" class="radio-label">Gradient</label>
+          </div>
+          <div class="col d-flex align-items-center">
+            <input type="color" id="gradientColor1" class="color-box me-2" value="#054080">
+            <span class="gradient-arrow me-2">⇄</span>
+            <input type="color" id="gradientColor2" class="color-box" value="#f30505">
+          </div>
+        </div>
+      
+        <!-- Background Option -->
+        <div class="color-option row align-items-center">
+          <div class="col-auto">
+            <label for="backgroundColor" class="label">Background:</label>
+          </div>
+          <div class="col d-flex align-items-center">
+            <input type="color" id="backgroundColor" class="color-box me-2" value="#ffffff">
+            <input type="text" id="backgroundColorCode" class="color-code form-control me-3" value="#ffffff">
+          </div>
+          <div class="col-auto">
+            <div class="transparent-checkbox">
+              <input type="checkbox" id="transparent" class="form-check-input me-2">
+              <label for="transparent" class="form-check-label">Transparent background</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="colors" class="tab-pane container">
+        <p id="colors-description" class="description">
+          <i class="info-icon">ℹ️</i> Embellish your customized QR with your brand colors
+        </p>
+      
+        <!-- Solid Color Option -->
+        <div class="color-option row align-items-center mb-4">
+          <div class="col-auto">
+            <input type="radio" name="color-type" id="solid-color" class="me-2" checked>
+          </div>
+          <div class="col-auto">
+            <label for="solid-color" class="radio-label">Solid Color</label>
+          </div>
+          <div class="col d-flex align-items-center">
+            <input type="color" id="solidColorPicker" class="color-box me-2" value="#054080">
+            <input type="text" id="solidColorCode" class="color-code form-control" value="#054080">
+          </div>
+        </div>
+      
+        <!-- Gradient Color Option -->
+        <div class="color-option row align-items-center mb-4">
+          <div class="col-auto">
+            <input type="radio" name="color-type" id="gradient-color" class="me-2">
+          </div>
+          <div class="col-auto">
+            <label for="gradient-color" class="radio-label">Gradient</label>
+          </div>
+          <div class="col d-flex align-items-center">
+            <input type="color" id="gradientColor1" class="color-box me-2" value="#ff0000">
+            <span class="gradient-arrow me-2">⇄</span>
+            <input type="color" id="gradientColor2" class="color-box" value="#f30505">
+          </div>
+        </div>
+      
+        <!-- Background Option -->
+        <div class="color-option row align-items-center">
+          <div class="col-auto">
+            <label for="backgroundColor" class="label">Background:</label>
+          </div>
+          <div class="col d-flex align-items-center">
+            <input type="color" id="backgroundColor" class="color-box me-2" value="#ffffff">
+            <input type="text" id="backgroundColorCode" class="color-code form-control me-3" value="#ffffff">
+          </div>
+          <div class="col-auto">
+            <div class="transparent-checkbox">
+              <input type="checkbox" id="transparent" class="form-check-input me-2">
+              <label for="transparent" class="form-check-label">Transparent background</label>
+            </div>
+          </div>
+        </div>
+      </div>
+            
+
+      <div id="frame" class="tab-pane">
+        <p>A quick response code with a frame and call-to-action gets 80% more scans</p>
+        <div class="row">
+          <!-- Frame Grid -->
+          <div class="col-3">
+            <button onclick="selectImage('Frame 1')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/1.svg" alt="Frame 1" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 2')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/2.svg" alt="Frame 2" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 3')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/3.svg" alt="Frame 3" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 4')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/4.svg" alt="Frame 4" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 5')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/5.svg" alt="Frame 5" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 6')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/6.svg" alt="Frame 6" class="pattern-img">
+            </button>
+          </div>
+          <!-- Add more frame buttons as needed -->
+        </div>
+        <div class="row mt-2">
+          <div class="col-3">
+            <button onclick="selectImage('Frame 7')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/7.svg" alt="Frame 7" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 8')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/8.svg" alt="Frame 8" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 9')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/9.svg" alt="Frame 9" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 10')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/10.svg" alt="Frame 10" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 11')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/11.svg" alt="Frame 11" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Frame 12')" class="pattern-btn">
+              <img src="https://www.qrcode-tiger.com/static/img/Home/Frames/12.svg" alt="Frame 12" class="pattern-img">
+            </button>
+          </div>
+        </div>
+        <!-- Color and Text Options -->
+        <div class="mt-3">
+          <label for="frame-color">Solid Color</label>
+          <input type="color" id="frame-color" name="frame-color" value="#054080">
+          <div class="mt-2">
+            <label for="frame-text">Frame text (limited to 15 characters)</label>
+            <input type="text" id="frame-text" maxlength="15" placeholder="SCAN ME">
+            <label for="frame-font">Frame text font</label>
+            <select id="frame-font">
+              <option value="Arial" selected>Arial</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Verdana">Verdana</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div id="templates" class="tab-pane">
+        <p>Choose from pre-made templates for your QR code.</p>
+        <div class="row">
+          <!-- Templates Grid -->
+          <div class="col-3">
+            <button onclick="selectImage('Template 1')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649231598229-250.png" alt="Template 1" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 2')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649231617724-250.png" alt="Template 2" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 3')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649231747435-250.png" alt="Template 3" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 4')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649232233123-250.png" alt="Template 4" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 5')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649241165901-250.png" alt="Template 5" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 6')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649232507928-250.png" alt="Template 6" class="pattern-img">
+            </button>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-3">
+            <button onclick="selectImage('Template 7')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649232666735-250.png" alt="Template 7" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 8')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649232825805-250.png" alt="Template 8" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 9')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649238019984-250.png" alt="Template 9" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 10')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649238435121-250.png" alt="Template 10" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 11')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649238986618-250.png" alt="Template 11" class="pattern-img">
+            </button>
+          </div>
+          <div class="col-3">
+            <button onclick="selectImage('Template 12')" class="pattern-btn">
+              <img src="https://media.qrtiger.com/templates/1649312569107-250.png" alt="Template 12" class="pattern-img">
+            </button>
+          </div>
+          <!-- More template buttons... -->
+        </div>
+      </div>
+      
+
+      <!-- QR Preview Section -->
+      <div class="container mt-4">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-6">
+            <div class="qr-preview text-center" style="border-top: 2px solid #e0e0e0;">
+              <div class="qr-code">
+                <img src="https://www.qrcode-tiger.com/static/img/Home/qr_preview.svg" alt="QR Code" style="margin-top: 20px;">
+              </div>
+              <div class="form-check mt-2">
+                <input type="checkbox" id="saveTemplate" class="form-check-input">
+                <label for="saveTemplate" class="form-check-label">Save as a template</label>
+              </div>
+              <div class="format-options mt-2">
+                <label>
+                  <input type="radio" name="format" value="PNG" checked> PNG
+                </label>
+                <label class="ml-3">
+                  <input type="radio" name="format" value="SVG"> SVG
+                </label>
+              </div>
+              <button id="downloadButton" class="btn btn-success mt-3">Download</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+  </main>
+
+  <footer class="bg-light text-center py-3">
+    <p>&copy; 2024 QR TIGER. All rights reserved.</p>
+  </footer>  
+  
+  <script>
+
+  //Pattern 
+
+    function selectImage(pattern) {
+  // Get all buttons
+  var buttons = document.querySelectorAll('.pattern-btn');
+  
+  // Remove active class from all buttons
+  buttons.forEach(function(button) {
+    button.classList.remove('active');
+  });
+  
+  // Add active class to the clicked button
+  var selectedButton = event.target.closest('button');
+  selectedButton.classList.add('active');
+}
+
+
+
+  //Logo
+
+  function selectLogo(logo) {
+  // Get all buttons
+  var buttons = document.querySelectorAll('.logo-btn');
+  
+  // Remove active class from all buttons
+  buttons.forEach(function(button) {
+    button.classList.remove('active');
+  });
+  
+  // Add active class to the clicked button
+  var selectedButton = event.target.closest('button');
+  selectedButton.classList.add('active');
+}
+
+
+  </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure the "Pattern" tab is active by default
+  const tabs = document.querySelectorAll('#qrTabs .nav-link');
+  const tabContents = document.querySelectorAll('.tab-pane');
+  
+  // Handle tab switching when a tab is clicked
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default anchor behavior
+      
+      // Remove the active class from all tabs and tab contents
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      // Add the active class to the clicked tab and corresponding content
+      tab.classList.add('active');
+      const tabId = tab.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+
+  // Set "Pattern" as the default active tab if no tab is already active
+  const defaultTab = document.querySelector('[data-tab="pattern"]');
+  if (defaultTab && !defaultTab.classList.contains('active')) {
+    defaultTab.classList.add('active');
+    document.getElementById('pattern').classList.add('active');
+  }
+});
+
+</script>
+
+
+  <script>
+    // Selectors
+    const btnUrl = document.getElementById("btn-url");
+    const btnVCard = document.getElementById("btn-vcard");
+    const btnFile = document.getElementById("btn-file");
+    const btnLinkPage = document.getElementById("btn-link-page");
+    const contentSection = document.getElementById("content-section");
+    const btnMusic = document.getElementById("btn-music");
+    const btnWifi = document.getElementById("btn-wifi");
+    const btnAppStores = document.getElementById("btn-app-stores");
+    const btnEvent = document.getElementById("btn-event");
+
+btnEvent.addEventListener("click", () => {
+  contentSection.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">Enter Event Details</h5>
+      <form>
+        <div class="mb-4">
+          <label for="eventTitle" class="form-label">Event Title</label>
+          <input type="text" class="form-control" id="eventTitle" placeholder="Enter event name">
+          <small class="text-muted">Enter the name of your event</small>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="eventDate" class="form-label">Date</label>
+            <input type="date" class="form-control" id="eventDate">
+          </div>
+          <div class="col-md-6">
+            <label for="eventTime" class="form-label">Time</label>
+            <input type="time" class="form-control" id="eventTime">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="eventLocation" class="form-label">Location</label>
+          <input type="text" class="form-control" id="eventLocation" placeholder="Enter event location">
+          <small class="text-muted">Physical address or virtual meeting link</small>
+        </div>
+        <div class="mb-4">
+          <label for="eventDescription" class="form-label">Description</label>
+          <textarea class="form-control" id="eventDescription" rows="3" placeholder="Enter event description"></textarea>
+        </div>
+        <div class="d-grid">
+          <button id="generate-btn" class="generate-btn">Generate QR Code</button>
+        </div>
+      </form>
+      <p class="text-muted mt-3 text-center">
+        Create a QR code for your event that adds it directly to calendars.
+      </p>
+      <p class="text-muted text-center">
+        We recommend using dynamic QR codes to update event details even after printing.
+      </p>
+    </div>`;
+  setActiveButton(btnEvent);
+});
+
+btnMusic.addEventListener("click", () => {
+  contentSection.innerHTML = `
+      <div id="qr-generator-container" class="container">
+      <h5 class="card-title">Upload File and Generate QR Code</h5>
+      <div id="upload-section">
+          <button id="upload-btn" class="upload-btn">
+          <span class="material-icons">upload</span> Upload File
+          </button>
+          <p>Supported formats:</p>
+          <div id="supported-formats">
+          <button id="btn-music" class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+              <span class="material-icons">music_note</span> MP3
+          </button>
+          <button class="btn btn-outline-primary d-flex align-items-center gap-2 bg-transparent">
+              <span class="material-icons">music_note</span> WAV
+          </button>
+          </div>
+      </div>
+  
+      <div id="size-options">
+          <p>Select File Size:</p>
+          <label>
+          <input type="radio" name="size" value="5MB" /> 5MB (Regular)
+          </label>
+          <label>
+          <input type="radio" name="size" value="10MB" /> 10MB (Advanced)
+          </label>
+          <label>
+          <input type="radio" name="size" value="20MB" /> 20MB (Premium)
+          </label>
+          <label>
+          <input type="radio" name="size" value="60MB" /> 60MB (Professional)
+          </label>
+      </div>
+  
+      <button id="generate-btn" class="generate-btn">
+          Generate Dynamic QR Code
+      </button>
+      <p class="note">We only provide dynamic QR codes for MP3 files.</p>
+      </div>
+
+    `;
+  setActiveButton(btnMusic);
+    });
+
+const btnForm = document.getElementById("btn-form");
+
+    btnForm.addEventListener("click", () => {
+    contentSection.innerHTML = `
+        <div class="card-body">
+            <div class="form-header">Enter the URL of your Google Form</div>
+            <div class="input-section">
+                <input type="text" placeholder="https://docs.google.com/forms">
+            </div>
+            <div class="qr-buttons">
+                <button id="static-qr">Static QR</button>
+                <button id="dynamic-qr">Dynamic QR</button>
+            </div>
+            <div class="form-footer">
+                <p>We recommend creating a dynamic QR code for tracking performance and editing data even after printing.</p>
+                <button id="generate-btn" class="generate-btn">Generate QR Code</button>
+            </div>
+        </div>
+    `;
+    setActiveButton(btnForm);
+    });
+
+
+btnAppStores.addEventListener("click", () => {
+  contentSection.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">Enter the URL of your App Store or Google Play</h5>
+      <form>
+        <div class="mb-4">
+          <label for="iosUrl" class="form-label">URL for iOS App Store</label>
+          <input type="text" class="form-control" id="iosUrl" placeholder="https://apps.apple.com/app/...">
+          <small class="text-muted">Enter your iOS app store link</small>
+        </div>
+        <div class="mb-4">
+          <label for="androidUrl" class="form-label">URL for Google Play Store</label>
+          <input type="text" class="form-control" id="androidUrl" placeholder="https://play.google.com/store/apps/...">
+          <small class="text-muted">Enter your Android app store link</small>
+        </div>
+        <div class="mb-4">
+          <label for="harmonyUrl" class="form-label">URL for Harmony Store</label>
+          <input type="text" class="form-control" id="harmonyUrl" placeholder="https://appgallery.huawei.com/...">
+          <small class="text-muted">Enter your Harmony OS app store link (optional)</small>
+        </div>
+        <div class="d-grid">
+          <button id="generate-btn" class="generate-btn">Generate QR Code</button>
+        </div>
+      </form>
+      <p class="text-muted mt-3 text-center">
+        Learn how to track data with dynamic QR codes for better analytics.
+      </p>
+      <p class="text-muted text-center">
+        We only provide dynamic QR codes for App Store solutions to ensure better tracking and updates.
+      </p>
+    </div>`;
+  setActiveButton(btnAppStores);
+});
+
+const btnMenu = document.getElementById("btn-menu");    // Event listener for Menu button
+btnMenu.addEventListener("click", () => {
+  contentSection.innerHTML = `
+<div class="card-body">
+  <h5 class="card-title" id="card-title">Upload File and Generate QR Code</h5>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="upload-section" id="upload-section">
+        <div id="file-options" class="file-options d-flex justify-content-around mb-3">
+          <button id="option-5mb" class="btn btn-outline-secondary">5MB Regular</button>
+          <button id="option-10mb" class="btn btn-outline-secondary">10MB Advance</button>
+          <button id="option-20mb" class="btn btn-outline-secondary">20MB Premium</button>
+          <button id="option-60mb" class="btn btn-outline-secondary">60MB Professional</button>
+        </div>
+        <p class="text-muted" id="upload-info">Upload your MENU:</p>
+        <div id="upload-box" class="upload-box mb-3">
+          <div id="upload-icon" class="upload-icon">
+            <i class="material-icons">cloud_upload</i>
+          </div>
+          <p id="upload-text">Click to Upload Menu</p>
+          <input type="file" id="menu-file-input" accept=".pdf, .jpeg, .png" style="display: none;">
+        </div>
+        <a href="#" id="usage-link" class="d-block text-primary">Usage instructions?</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer text-center mt-4">
+    <button id="generate-btn" class="btn btn-primary">Generate dynamic QR code</button>
+    <p id="footer-note" class="text-muted mt-2">We only provide dynamic QR codes.</p>
+  </div>
+</div>`;
+  setActiveButton(btnMenu);
+
+  // Add functionality for the file upload logic.
+  const menuFileInput = document.getElementById("menuFileInput");
+  const uploadBox = document.querySelector(".upload-box");
+
+  uploadBox.addEventListener("click", () => {
+    menuFileInput.click();
+  });
+
+  menuFileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      alert(`You selected: ${file.name}`);
+    }
+  });
+});
+
+    btnWifi.addEventListener("click", () => {
+    contentSection.innerHTML = `
+        <div class="card-body">
+        <h5 class="card-title">Complete the WiFi Data Entry</h5>
+        <div class="wifi-form">
+            <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" class="form-control">
+                <option value="" disabled selected>Please select</option>
+                <option value="WPA">WPA</option>
+                <option value="WEP">WEP</option>
+                <option value="No encryption">No encryption</option>
+            </select>
+            </div>
+            <div class="form-group">
+            <label for="ssid">SSID <span>(Check the bottom or side of your router)</span></label>
+            <input type="text" id="ssid" class="form-control" placeholder="Enter SSID">
+            </div>
+            <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Enter Password">
+            </div>
+            <button id="generate-btn" class="generate-btn">Generate QR Code</button>
+        </div>
+        </div>
+    `;
+    setActiveButton(btnWifi);
+
+    // Enable the Generate button only when required fields are filled
+    const ssidInput = document.getElementById("ssid");
+    const passwordInput = document.getElementById("password");
+    const typeSelect = document.getElementById("type");
+    const generateQr = document.getElementById("generateQr");
+
+    [ssidInput, passwordInput, typeSelect].forEach((element) =>
+        element.addEventListener("input", () => {
+        generateQr.disabled =
+            !ssidInput.value || !passwordInput.value || !typeSelect.value;
+        })
+    );
+    });
+
+
+    btnLinkPage.addEventListener("click", () => {
+      contentSection.innerHTML = `
+        <div class="card-body">
+          <h5 class="card-title">Enter the Link Page URL</h5>
+          <form>
+            <div class="mb-3">
+              <label for="linkPageUrl" class="form-label">Link Page URL</label>
+              <input type="text" class="form-control" id="linkPageUrl" placeholder="https://www.mywebsite.com/link-page">
+            </div>
+            <div class="mb-3">
+              <label for="linkPageDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="linkPageDescription" rows="3" placeholder="Enter a description for the link page"></textarea>
+            </div>
+            <button id="generate-btn" class="generate-btn">Generate QR Code</button>
+          </form>
+          <p class="text-muted mt-3">
+            Enter the URL of the link page you want to generate a QR code for.
+          </p>
+        </div>`;
+      setActiveButton(btnLinkPage);
+    });
+
+    btnFile.addEventListener("click", () => {
+  contentSection.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">Upload File and Generate QR Code</h5>
+      <div class="upload-box" id="uploadBox">
+        <p>Click to <button id="uploadBtn">Upload File</button></p>
+        <input type="file" id="fileInput" style="display: none;" />
+      </div>
+      <div class="supported-formats">
+        <strong>Supported formats:</strong>
+        <span>PDF</span>
+        <span>JPEG</span>
+        <span>PNG</span>
+        <span>MP4</span>
+        <span>Excel</span>
+        <span>Word</span>
+      </div>
+      <div class="file-sizes">
+        <div><input type="radio" name="fileSize"> 5MB Regular</div>
+        <div><input type="radio" name="fileSize"> 10MB Advanced</div>
+        <div><input type="radio" name="fileSize"> 20MB Premium</div>
+        <div><input type="radio" name="fileSize"> 60MB Professional</div>
+      </div>
+      <div class="generate-btn">
+        <button id="generate-btn" class="generate-btn">Generate Dynamic QR Code</button>
+      </div>
+    </div>
+  `;
+  setActiveButton(btnFile);
+
+  // Add functionality for the file upload logic.
+  const uploadBox = document.getElementById("uploadBox");
+  const fileInput = document.getElementById("fileInput");
+
+  uploadBox.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      alert(`You selected: ${file.name}`);
+    }
+  });
+});
+
+    // Event listener for URL button
+    btnUrl.addEventListener("click", () => {
+      contentSection.innerHTML = `
+        <div class="card-body">
+          <h5 class="card-title">Enter the URL</h5>
+          <input type="text" class="form-control mb-3" placeholder="https://www.mywebsite.com">
+          <div class="d-flex align-items-center gap-3">
+            <label class="form-check-label">
+              <input type="radio" name="qr-type" checked> Static QR
+            </label>
+            <label class="form-check-label">
+              <input type="radio" name="qr-type"> Dynamic QR
+            </label>
+          </div>
+          <button id="generate-btn" class="generate-btn">Generate QR Code</button>
+          <p class="text-muted">
+            We recommend creating a dynamic QR code if you want to track performance and edit data even after printing.
+          </p>
+        </div>`;
+      setActiveButton(btnUrl);
+    });
+
+    // Event listener for vCard button
+    btnVCard.addEventListener("click", () => {
+      contentSection.innerHTML = `
+    <div class="card-body">
+      <h5 class="card-title">Complete the vCard data entry</h5>
+      <form>
+        <div class="row g-3">
+          <!-- Name and Company -->
+          <div class="col-md-6">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name">
+          </div>
+          <div class="col-md-6">
+            <label for="company" class="form-label">Company</label>
+            <input type="text" class="form-control" id="company" placeholder="Company Name">
+          </div>
+
+          <!-- Website and Position -->
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Your Website (https://)">
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Position">
+          </div>
+
+          <!-- Contacts -->
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Phone (Mobile)">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Phone (Work)">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Phone">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Fax">
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-12">
+            <input type="email" class="form-control" placeholder="Your Email (username@email.com)">
+          </div>
+
+          <!-- Address -->
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Country">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="State">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Street">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="City">
+          </div>
+          <div class="col-md-3">
+            <input type="text" class="form-control" placeholder="Zipcode">
+          </div>
+
+          <!-- Personal Description -->
+          <div class="col-md-12">
+            <textarea class="form-control" rows="3" placeholder="Give a brief description of yourself"></textarea>
+          </div>
+
+          <!-- Photo and Background Color -->
+            <div class="col-md-6">
+            <label class="form-label">Upload Photo</label>
+            <div class="upload-box border p-3 text-center" style="cursor: pointer;" id="uploadBox">
+                <span class="material-icons" style="font-size: 48px;">upload</span>
+                <p>Click to Upload</p>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <img id="previewImage" src="" alt="Preview" class="mt-3" style="display: none; max-width: 100%; height: auto; border: 1px solid #ccc;">
+            </div>
+            <button type="button" class="btn btn-sm btn-light mt-2" id="clearButton">Clear</button>
+            </div>
+            <div class="col-md-6">
+            <label class="form-label">Background Color</label>
+            
+            <!-- Solid Color Selection -->
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="colorType" id="solidColor" checked>
+                <label class="form-check-label" for="solidColor">Solid Color</label>
+            </div>
+            <input type="color" class="form-control mt-2" id="solidColorInput" value="#4a87e0">
+            
+            <!-- Gradient Selection -->
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="radio" name="colorType" id="gradient">
+                <label class="form-check-label" for="gradient">Gradient</label>
+            </div>
+            <div id="gradientInputs" class="mt-2" style="display: none;">
+                <label for="gradientStart">Start Color:</label>
+                <input type="color" id="gradientStart" class="form-control mb-2" value="#4a87e0">
+                <label for="gradientEnd">End Color:</label>
+                <input type="color" id="gradientEnd" class="form-control mb-2" value="#87e04a">
+            </div>
+            
+            <!-- Text field to display the selected value -->
+            <input type="text" class="form-control mt-2" id="finalColorInput" value="#4a87e0">
+            </div>
+
+          <!-- Generate QR Code -->
+          <div class="col-md-12 text-center mt-4">
+            <button id="generate-btn" class="generate-btn">Generate Dynamic QR Code</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>`;
+      setActiveButton(btnVCard);
+    });
+
+    
+
+    // Function to set active button
+// Update the setActiveButton function
+function setActiveButton(activeButton) {
+  // Remove active class from all buttons
+  const buttons = document.querySelectorAll(".btn-outline-primary");
+  buttons.forEach(button => {
+    button.classList.remove("active");
+  });
+  
+  // Add active class to clicked button
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+}
+
+// Function to highlight the active tab button
+function highlightActiveTab(clickedTab) {
+  // Remove active class from all nav-item elements
+  const allNavItems = document.querySelectorAll('#qrTabs .nav-item');
+  allNavItems.forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  // Add active class to the clicked tab
+  const activeNavItem = clickedTab.closest('.nav-item');
+  if (activeNavItem) {
+    activeNavItem.classList.add('active');
+  }
+}
+
+// Select all nav-link elements and add click event listeners
+const tabLinks = document.querySelectorAll('#qrTabs .nav-link');
+tabLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    highlightActiveTab(event.target);
+  });
+});
+
+  </script>
+
+<script>
+    const solidColorRadio = document.getElementById('solidColor');
+    const gradientRadio = document.getElementById('gradient');
+    const solidColorInput = document.getElementById('solidColorInput');
+    const gradientInputs = document.getElementById('gradientInputs');
+    const gradientStart = document.getElementById('gradientStart');
+    const gradientEnd = document.getElementById('gradientEnd');
+    const finalColorInput = document.getElementById('finalColorInput');
+  
+    // Event listener for radio buttons
+    solidColorRadio.addEventListener('change', () => {
+      if (solidColorRadio.checked) {
+        gradientInputs.style.display = 'none';
+        finalColorInput.value = solidColorInput.value; // Update value with solid color
+      }
+    });
+  
+    gradientRadio.addEventListener('change', () => {
+      if (gradientRadio.checked) {
+        gradientInputs.style.display = 'block';
+        finalColorInput.value = `linear-gradient(${gradientStart.value}, ${gradientEnd.value})`;
+      }
+    });
+  
+    // Event listeners for solid color and gradient inputs
+    solidColorInput.addEventListener('input', () => {
+      if (solidColorRadio.checked) {
+        finalColorInput.value = solidColorInput.value;
+      }
+    });
+  
+    gradientStart.addEventListener('input', () => {
+      if (gradientRadio.checked) {
+        finalColorInput.value = `linear-gradient(${gradientStart.value}, ${gradientEnd.value})`;
+      }
+    });
+  
+    gradientEnd.addEventListener('input', () => {
+      if (gradientRadio.checked) {
+        finalColorInput.value = `linear-gradient(${gradientStart.value}, ${gradientEnd.value})`;
+      }
+    });
+  </script>
+
+<script>
+    const uploadBox = document.getElementById('uploadBox');
+    const fileInput = document.getElementById('fileInput');
+    const previewImage = document.getElementById('previewImage');
+    const clearButton = document.getElementById('clearButton');
+  
+    // Open file dialog when clicking on the upload box
+    uploadBox.addEventListener('click', () => {
+      fileInput.click();
+    });
+  
+    // Handle file selection
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (file) {
+        const validExtensions = ['image/jpeg', 'image/png', 'image/gif'];
+        if (validExtensions.includes(file.type)) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            previewImage.src = reader.result;
+            previewImage.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert('Please upload a valid image file (JPG, PNG, or GIF).');
+          fileInput.value = ''; // Clear invalid file
+        }
+      }
+    });
+  
+    // Clear the uploaded image
+    clearButton.addEventListener('click', () => {
+      fileInput.value = ''; // Reset file input
+      previewImage.src = ''; // Clear image preview
+      previewImage.style.display = 'none'; // Hide the image preview
+    });
+  </script>
+  <script href="../static/script.js"></script>
+</body>
+</html>
